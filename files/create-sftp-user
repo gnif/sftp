@@ -67,8 +67,8 @@ fi
 
 useradd "${useraddOptions[@]}" "$user"
 mkdir -p "/home/$user"
-chown root:root "/home/$user"
-chmod 755 "/home/$user"
+chown $uid:$gid "/home/$user"
+chmod 750 "/home/$user"
 
 # Retrieving user id to use it in chown commands instead of the user name
 # to avoid problems on alpine when the user name contains a '.'
@@ -97,7 +97,7 @@ if [ -n "$dir" ]; then
         if [ ! -d "$dirPath" ]; then
             log "Creating directory: $dirPath"
             mkdir -p "$dirPath"
-            chown -R "$uid:users" "$dirPath"
+            chown -R "$uid:$gid" "$dirPath"
         else
             log "Directory already exists: $dirPath"
         fi
